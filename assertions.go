@@ -33,3 +33,17 @@ func Equal[T any](t Test, actual, expected T, msg ...string) {
 		}
 	}
 }
+
+func NotEqual[T any](t Test, actual, expected T, msg ...string) {
+	t.Helper()
+
+	if reflect.DeepEqual(expected, actual) {
+		if len(msg) > 0 {
+			t.Errorf(msg[0], actual)
+		} else {
+			formatterForActual := getMsgFormatter(actual)
+			toBeFormatted := fmt.Sprintf("Expected different values, but got %s for both", formatterForActual)
+			t.Errorf(toBeFormatted, actual)
+		}
+	}
+}

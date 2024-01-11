@@ -66,3 +66,41 @@ func TestEqual(t *testing.T) {
 		assertFailure(t, expectedMsg, mt.ErrorMessages)
 	})
 }
+
+func TestNotEqual(t *testing.T) {
+	t.Run("DefaultArgs", func(t *testing.T) {
+		assert.NotEqual(t, 1, 2)
+	})
+
+	t.Run("DefaultArgsByteSlice", func(t *testing.T) {
+		assert.NotEqual(t, []byte{'a', 'b'}, []byte{'c', 'd'})
+	})
+
+	t.Run("DefaultArgsFailure", func(t *testing.T) {
+		expectedMsg := "Expected different values, but got \"two\" for both"
+		mt := &mockTestHelper{}
+		assert.NotEqual(mt, "two", "two")
+		assertFailure(t, expectedMsg, mt.ErrorMessages)
+	})
+
+	t.Run("DefaultArgsFloatFailure", func(t *testing.T) {
+		expectedMsg := "Expected different values, but got 1.5 for both"
+		mt := &mockTestHelper{}
+		assert.NotEqual(mt, 1.5, 1.5)
+		assertFailure(t, expectedMsg, mt.ErrorMessages)
+	})
+
+	t.Run("CustomMsgArgNoFormatters", func(t *testing.T) {
+		expectedMsg := "Custom message%!(EXTRA int=2)"
+		mt := &mockTestHelper{}
+		assert.NotEqual(mt, 2, 2, "Custom message")
+		assertFailure(t, expectedMsg, mt.ErrorMessages)
+	})
+
+	t.Run("CustomMsgArgWithFormatters", func(t *testing.T) {
+		expectedMsg := "Wanted different, got same instead: 2"
+		mt := &mockTestHelper{}
+		assert.NotEqual(mt, 2, 2, "Wanted different, got same instead: %d")
+		assertFailure(t, expectedMsg, mt.ErrorMessages)
+	})
+}
