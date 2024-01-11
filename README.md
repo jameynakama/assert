@@ -26,4 +26,8 @@ func TestOneIsOne(t *testing.T) {
 func TestOneIsNotOne(t *testing.T) {
     assert.NotEqual(t, "one", "two")
 }
+
+func TestWithCustomMessage(t *testing.T) {
+    assert.Equal(t, []byte{'a', 'b'}, []byte{'c', 'd'}, "I wanted %v, but I got %v instead!")
+}
 ```
