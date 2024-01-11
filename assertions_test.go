@@ -39,28 +39,28 @@ func TestEqual(t *testing.T) {
 	})
 
 	t.Run("DefaultArgsFailure", func(t *testing.T) {
-		expectedMsg := "Expected \"one\", got \"two\" instead"
+		expectedMsg := "Expected \"two\", got \"one\" instead"
 		mt := &mockTestHelper{}
 		assert.Equal(mt, "one", "two")
 		assertFailure(t, expectedMsg, mt.ErrorMessages)
 	})
 
 	t.Run("DefaultArgsFloatFailure", func(t *testing.T) {
-		expectedMsg := "Expected 1.5, got 2.5 instead"
+		expectedMsg := "Expected 2.5, got 1.5 instead"
 		mt := &mockTestHelper{}
 		assert.Equal(mt, 1.5, 2.5)
 		assertFailure(t, expectedMsg, mt.ErrorMessages)
 	})
 
 	t.Run("CustomMsgArgNoFormatters", func(t *testing.T) {
-		expectedMsg := "Custom message%!(EXTRA int=1, int=2)"
+		expectedMsg := "Custom message%!(EXTRA int=2, int=1)"
 		mt := &mockTestHelper{}
 		assert.Equal(mt, 1, 2, "Custom message")
 		assertFailure(t, expectedMsg, mt.ErrorMessages)
 	})
 
 	t.Run("CustomMsgArgWithFormatters", func(t *testing.T) {
-		expectedMsg := "Wanted 1, got 2 instead"
+		expectedMsg := "Wanted 2, got 1 instead"
 		mt := &mockTestHelper{}
 		assert.Equal(mt, 1, 2, "Wanted %d, got %d instead")
 		assertFailure(t, expectedMsg, mt.ErrorMessages)
