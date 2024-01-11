@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"jameynakama.com/assert"
+	"github.com/jameynakama/assert"
 )
 
 type mockTestHelper struct {
