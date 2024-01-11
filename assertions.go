@@ -2,6 +2,7 @@ package assert
 
 import (
 	"fmt"
+	"reflect"
 )
 
 type Test interface {
@@ -18,14 +19,10 @@ func getMsgFormatter(v any) string {
 	}
 }
 
-func Equal(t Test, expected, actual any, msg ...string) {
+func Equal[T any](t Test, actual, expected T, msg ...string) {
 	t.Helper()
 
-	// TODO: Determine if the expected and actual values can be compared using
-	// the == operator. If not, then we need to use the fmt.Sprintf() function
-	// to format the values for comparison, or use reflect.DeepEqual.
-
-	if actual != expected {
+	if !reflect.DeepEqual(actual, expected) {
 		if len(msg) > 0 {
 			t.Errorf(msg[0], expected, actual)
 		} else {

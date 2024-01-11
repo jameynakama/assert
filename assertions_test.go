@@ -34,6 +34,10 @@ func TestEqual(t *testing.T) {
 		assert.Equal(t, 1, 1)
 	})
 
+	t.Run("DefaultArgsByteSlice", func(t *testing.T) {
+		assert.Equal(t, []byte{'a', 'b'}, []byte{'a', 'b'})
+	})
+
 	t.Run("DefaultArgsFailure", func(t *testing.T) {
 		expectedMsg := "Expected \"one\", got \"two\" instead"
 		mt := &mockTestHelper{}
