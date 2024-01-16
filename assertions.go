@@ -47,3 +47,25 @@ func NotEqual[T any](t Test, actual, expected T, msg ...string) {
 		}
 	}
 }
+
+func InSlice[T any](t Test, slice []T, expected T, msg ...string) {
+	t.Helper()
+
+	var inSlice bool
+	for _, v := range slice {
+		if reflect.DeepEqual(v, expected) {
+			inSlice = true
+			break
+		}
+	}
+
+	if !inSlice {
+		if len(msg) > 0 {
+			t.Errorf(msg[0], expected)
+		} else {
+			formatterForExpected := getMsgFormatter(expected)
+			toBeFormatted := fmt.Sprintf("Expected %s to be in slice %+v", formatterForExpected, slice)
+			t.Errorf(toBeFormatted, expected)
+		}
+	}
+}
