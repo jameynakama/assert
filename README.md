@@ -31,3 +31,7 @@ func TestWithCustomMessage(t *testing.T) {
     assert.Equal(t, []byte{'a', 'b'}, []byte{'c', 'd'}, "I wanted %v, but I got %v instead!")
 }
 ```
+
+## License
+
+This project is licensed under the terms of the MIT license.
